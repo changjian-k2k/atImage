@@ -224,6 +224,8 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
 
     def get_selected_file_path(self):
         selected_item = self.listWidget_fileList.currentItem()
+        if selected_item is None:
+            return None
         file_path = self.image_file.get_file_path(selected_item.text())
         return file_path
 
@@ -381,14 +383,17 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
             self.set_rect(end_pos)
             self._draw_rect_on_image()
 
-            roi = [self.rect[0]/self.view_width, self.rect[1]/self.view_height, (self.rect[0]+self.rect[2])/self.view_width, (self.rect[1]+self.rect[3])/self.view_height]
+            roi = [self.rect[0]/self.view_width, self.rect[1]/self.view_height,
+                   (self.rect[0]+self.rect[2])/self.view_width,
+                   (self.rect[1]+self.rect[3])/self.view_height]
             self.norm_roi = roi
             # print(str(roi))
 
             file_path = self.get_selected_file_path()
-            mean, snr = self.get_mean_snr(file_path)
-            self.mean_update.emit(mean)
-            self.snr_update.emit(snr)
+            if file_path is not None or len(file_path) is not 0:
+                mean, snr = self.get_mean_snr(file_path)
+                self.mean_update.emit(mean)
+                self.snr_update.emit(snr)
 
     def _update_xStart(self):
         raw_text = self.lineEdit_xStart.text()

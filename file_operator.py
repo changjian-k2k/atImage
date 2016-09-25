@@ -22,18 +22,19 @@ class ImageFolder(QObject):
 
     def find_files(self, extension):
         self.file_list.clear()
-
         self.extensions = extension
-        files = os.listdir(self.cur_dir)
-        file_num = len(files)
 
-        for iFile in range(file_num):
-            file_name = files[iFile]
-            file_path = os.path.join(self.cur_dir, file_name)
-            file_ext = self._find_extension(file_name)
+        if len(self.cur_dir) is not 0:
+            files = os.listdir(self.cur_dir)
+            file_num = len(files)
 
-            if (file_ext in extension) and os.path.isfile(file_path):
-                self.file_list.append(file_name)
+            for iFile in range(file_num):
+                file_name = files[iFile]
+                file_path = os.path.join(self.cur_dir, file_name)
+                file_ext = self._find_extension(file_name)
+
+                if (file_ext in extension) and os.path.isfile(file_path):
+                    self.file_list.append(file_name)
 
     @staticmethod
     def _find_extension(file_name):
