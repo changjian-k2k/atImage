@@ -40,7 +40,7 @@ class ImageFolder(QObject):
         lists = file_name.split('.')
         if len(lists) > 1:
             file_ext = lists[-1]
-            return file_ext
+            return file_ext.lower()
         else:
             return None
 
