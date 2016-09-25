@@ -1,4 +1,7 @@
 /__pycache__/
 
 .idea
+release
+
 /test.py
+/atImage.spec

@@ -1,0 +1,1 @@
+pyinstaller --workpath=release\build --distpath=release -F -w --icon="atImage.ico" atImage.py
