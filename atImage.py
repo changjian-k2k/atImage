@@ -62,7 +62,7 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
         self.listWidget_fileList.clicked.connect(self.update_image_show)
         self.pushButton_getMean.clicked.connect(self.show_files_mean)
         self.graphicsView_image.mousePressEvent = self.click_down_on_image
-        self.graphicsView_image.mouseReleaseEvent = self.release_up_on_image
+        # self.graphicsView_image.mouseReleaseEvent = self.release_up_on_image
         self.lineEdit_xStart.returnPressed.connect(self._update_xStart)
         self.lineEdit_yStart.returnPressed.connect(self._update_yStart)
         self.lineEdit_xEnd.returnPressed.connect(self._update_xEnd)
@@ -252,9 +252,10 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
 
     def _update_result(self):
         file_path = self.get_selected_file_path()
-        mean, snr = self.get_mean_snr(file_path)
-        self.mean_update.emit(mean)
-        self.snr_update.emit(snr)
+        if file_path is not None:
+            mean, snr = self.get_mean_snr(file_path)
+            self.mean_update.emit(mean)
+            self.snr_update.emit(snr)
 
     def update_image_show(self):
         file_path = self.get_selected_file_path()
@@ -372,12 +373,14 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
             offset = event.pos()
             self.set_rect(offset, True)
             self.graphicsView_image.mouseMoveEvent = self.move_on_image
+            self.graphicsView_image.mouseReleaseEvent = self.release_up_on_image
         elif event.button() == QtCore.Qt.RightButton:
             print("right button")
 
     def release_up_on_image(self, event):
         if event.button() == QtCore.Qt.LeftButton:
             self.graphicsView_image.mouseMoveEvent = None
+            self.graphicsView_image.mouseReleaseEvent = None
 
             end_pos = event.pos()
             self.set_rect(end_pos)
@@ -387,13 +390,7 @@ class atImage_window(QtWidgets.QWidget, Ui_Form):
                    (self.rect[0]+self.rect[2])/self.view_width,
                    (self.rect[1]+self.rect[3])/self.view_height]
             self.norm_roi = roi
-            # print(str(roi))
-
-            file_path = self.get_selected_file_path()
-            if file_path is not None or len(file_path) is not 0:
-                mean, snr = self.get_mean_snr(file_path)
-                self.mean_update.emit(mean)
-                self.snr_update.emit(snr)
+            self._update_result()
 
     def _update_xStart(self):
         raw_text = self.lineEdit_xStart.text()
