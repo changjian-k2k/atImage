@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import os
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtGui import QPixmap, QPen
-from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsRectItem
-from PyQt5.QtWidgets import QGraphicsPixmapItem
+from PyQt5.QtGui import (QPixmap, QPen, QIcon)
+from PyQt5.QtWidgets import (QGraphicsView, QGraphicsScene, QGraphicsRectItem, QGraphicsPixmapItem)
 from atImage_ui_form import Ui_Form
 from file_operator import *
 from simple_isp import *
-import os
 from qt_binder import *
 
 c_t = "\t"

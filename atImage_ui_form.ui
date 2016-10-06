@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>DJI Vision Image Tool</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="mainWindow.qrc">
+    <normaloff>:/icon/images/atImage.ico</normaloff>:/icon/images/atImage.ico</iconset>
+  </property>
   <widget class="QListWidget" name="listWidget_fileList">
    <property name="geometry">
     <rect>
@@ -845,6 +849,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="mainWindow.qrc"/>
+ </resources>
  <connections/>
 </ui>

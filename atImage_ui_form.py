@@ -12,6 +12,9 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1119, 627)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icon/images/atImage.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form.setWindowIcon(icon)
         self.listWidget_fileList = QtWidgets.QListWidget(Form)
         self.listWidget_fileList.setGeometry(QtCore.QRect(9, 40, 331, 221))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -381,7 +384,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "atImage"))
+        Form.setWindowTitle(_translate("Form", "DJI Vision Image Tool"))
         self.pushButton_getMean.setText(_translate("Form", "平均值"))
         self.label.setText(_translate("Form", "文件夹路径："))
         self.pushButton_folderPath.setText(_translate("Form", "..."))
@@ -420,3 +423,4 @@ class Ui_Form(object):
         self.label_16.setText(_translate("Form", "@ 8 bit"))
         self.pushButton_clear_log.setText(_translate("Form", "清空LOG"))
 
+import mainWindow_rc
